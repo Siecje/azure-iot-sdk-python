@@ -190,6 +190,10 @@ class MQTTTransport(object):
                     logger.warning(
                         "connection failed, but no on_mqtt_connection_failure_handler handler callback provided"
                     )
+            elif not this:
+                logger.info(
+                    "on_connect called with transport==None. Transport must have been garbage collected. stopping loop"
+                )
             elif this.on_mqtt_connected_handler:
                 try:
                     this.on_mqtt_connected_handler()
